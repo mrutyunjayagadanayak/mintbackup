@@ -20,6 +20,12 @@ import aptkit.simpleclient
 from mintcommon.installer.cache import PkgCache
 
 import setproctitle
+import secrets
+import base64
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives import padding
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.backends import default_backend
 setproctitle.setproctitle("mintbackup")
 
 # i18n
@@ -50,6 +56,52 @@ def print_timing(func):
         print('%s took %0.3f ms' % (func.__name__, (t2 - t1) * 1000.0))
         return res
     return wrapper
+
+def get_aes_key_from_password(password, salt):
+    kdf = PBKDF2HMAC(
+        algorithm=hashlib.sha256(),
+        length=32,
+        salt=salt,
+        iterations=100000,
+        backend=default_backend()
+    )
+    return kdf.derive(password.encode())
+
+def encrypt_file_stream(input_path, output_path, password):
+    salt = secrets.token_bytes(16)
+    nonce = secrets.token_bytes(12)
+    key = get_aes_key_from_password(password, salt)
+    cipher = Cipher(algorithms.AES(key), modes.GCM(nonce), backend=default_backend())
+    encryptor = cipher.encryptor()
+
+    chunk_size = 64 * 1024
+    with open(input_path, 'rb') as fin, open(output_path, 'wb') as fout:
+        fout.write(salt)
+        fout.write(nonce)
+        while True:
+            chunk = fin.read(chunk_size)
+            if not chunk:
+                break
+            fout.write(encryptor.update(chunk))
+        fout.write(encryptor.finalize())
+        fout.write(encryptor.tag)
+
+def decrypt_file_stream(input_path, output_path, password):
+    with open(input_path, 'rb') as fin:
+        salt = fin.read(16)
+        nonce = fin.read(12)
+        file_data = fin.read()
+        tag = file_data[-16:]
+        ciphertext = file_data[:-16]
+        key = get_aes_key_from_password(password, salt)
+        cipher = Cipher(algorithms.AES(key), modes.GCM(nonce, tag), backend=default_backend())
+        decryptor = cipher.decryptor()
+
+        chunk_size = 64 * 1024
+        with open(output_path, 'wb') as fout:
+            for i in range(0, len(ciphertext), chunk_size):
+                fout.write(decryptor.update(ciphertext[i:i+chunk_size]))
+            fout.write(decryptor.finalize())
 
 class MintBackup:
 
