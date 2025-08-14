@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
+<!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkFileFilter" id="filefilter1">
@@ -262,9 +262,6 @@
                 </child>
               </object>
             </child>
-            <child type="tab">
-              <placeholder/>
-            </child>
             <child>
               <object class="GtkBox" id="vbox2">
                 <property name="visible">True</property>
@@ -314,9 +311,6 @@
               <packing>
                 <property name="position">1</property>
               </packing>
-            </child>
-            <child type="tab">
-              <placeholder/>
             </child>
             <child>
               <object class="GtkBox" id="vbox5">
@@ -438,9 +432,6 @@
               <packing>
                 <property name="position">2</property>
               </packing>
-            </child>
-            <child type="tab">
-              <placeholder/>
             </child>
             <child>
               <object class="GtkBox" id="vbox3">
@@ -588,9 +579,6 @@
                 <property name="position">3</property>
               </packing>
             </child>
-            <child type="tab">
-              <placeholder/>
-            </child>
             <child>
               <object class="GtkBox" id="vbox1">
                 <property name="visible">True</property>
@@ -667,9 +655,6 @@
                 <property name="position">4</property>
               </packing>
             </child>
-            <child type="tab">
-              <placeholder/>
-            </child>
             <child>
               <object class="GtkBox" id="vbox7">
                 <property name="visible">True</property>
@@ -734,9 +719,6 @@
               <packing>
                 <property name="position">5</property>
               </packing>
-            </child>
-            <child type="tab">
-              <placeholder/>
             </child>
             <child>
               <object class="GtkBox" id="vbox6">
@@ -869,9 +851,6 @@
                 <property name="position">6</property>
               </packing>
             </child>
-            <child type="tab">
-              <placeholder/>
-            </child>
             <child>
               <object class="GtkBox" id="vbox4">
                 <property name="visible">True</property>
@@ -948,9 +927,6 @@
                 <property name="position">7</property>
               </packing>
             </child>
-            <child type="tab">
-              <placeholder/>
-            </child>
             <child>
               <object class="GtkBox" id="vbox8">
                 <property name="visible">True</property>
@@ -1015,9 +991,6 @@
               <packing>
                 <property name="position">8</property>
               </packing>
-            </child>
-            <child type="tab">
-              <placeholder/>
             </child>
             <child>
               <object class="GtkBox" id="vbox20">
@@ -1154,9 +1127,6 @@
                 <property name="position">9</property>
               </packing>
             </child>
-            <child type="tab">
-              <placeholder/>
-            </child>
             <child>
               <object class="GtkBox" id="vbox19">
                 <property name="visible">True</property>
@@ -1194,9 +1164,6 @@
               <packing>
                 <property name="position">10</property>
               </packing>
-            </child>
-            <child type="tab">
-              <placeholder/>
             </child>
             <child>
               <object class="GtkBox" id="vbox21">
@@ -1246,9 +1213,6 @@
               <packing>
                 <property name="position">11</property>
               </packing>
-            </child>
-            <child type="tab">
-              <placeholder/>
             </child>
             <child>
               <object class="GtkBox" id="vbox22">
@@ -1365,9 +1329,6 @@
                 <property name="position">12</property>
               </packing>
             </child>
-            <child type="tab">
-              <placeholder/>
-            </child>
             <child>
               <object class="GtkBox" id="vbox23">
                 <property name="visible">True</property>
@@ -1406,8 +1367,123 @@
                 <property name="position">13</property>
               </packing>
             </child>
-            <child type="tab">
-              <placeholder/>
+            <child>
+              <object class="GtkBox" id="vbox24">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="border-width">12</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">12</property>
+                <child>
+                  <object class="GtkBox" id="box">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkCheckButton">
+                        <property name="label" translatable="yes">Password protect backup</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">False</property>
+                        <property name="draw-indicator">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">10</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="bo">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Password</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="padding">1</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="password1">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="visibility">False</property>
+                        <property name="invisible-char">•</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="padding">50</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="b">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Confirm password</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="password2">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="visibility">False</property>
+                        <property name="invisible-char">•</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="position">14</property>
+              </packing>
             </child>
           </object>
           <packing>
