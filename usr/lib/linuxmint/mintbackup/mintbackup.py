@@ -21,11 +21,12 @@ from mintcommon.installer.cache import PkgCache
 
 import setproctitle
 import secrets
-import base64
+import re
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
+
 setproctitle.setproctitle("mintbackup")
 
 # i18n
@@ -107,6 +108,19 @@ def decrypt_file_stream(input_path, output_path, password):
                 bytes_remaining -= len(chunk)
             fout.write(decryptor.finalize())
 
+def check_password_strength(password):
+    # Returns a score: 0 (very weak) to 3 (strong)
+    score = 0
+    if len(password) >= 8:
+        score += 1
+    if re.search(r"\d", password):
+        score += 1
+    if re.search(r"[A-Z]", password) and re.search(r"[a-z]", password):
+        score += 1
+    if re.search(r"[^A-Za-z0-9]", password):
+        score += 1
+    return min(score, 3) 
+
 class MintBackup:
 
     def __init__(self):
@@ -136,6 +150,14 @@ class MintBackup:
         self.builder.get_object("button_restore_files").connect("clicked", self.go_to_tab, TAB_FILE_RESTORE_1)
         self.builder.get_object("button_backup_packages").connect("clicked", self.backup_pkg_load_from_mintinstall)
         self.builder.get_object("button_restore_packages").connect("clicked", self.go_to_tab, TAB_PKG_RESTORE_1)
+
+        self.builder.get_object("password1").set_sensitive(False)
+        self.builder.get_object("password2").set_sensitive(False)
+        self.builder.get_object("password1").connect("changed", self.on_password_fields_changed)
+        self.builder.get_object("password2").connect("changed", self.on_password_fields_changed)
+        self.builder.get_object("password_protect_check").connect("toggled", self.on_password_protect_toggled)
+        self.builder.get_object("password_visibility").connect("toggled", self.on_password_visibility_toggled)
+
 
         # set up exclusions page
         self.iconTheme = Gtk.IconTheme.get_default()
@@ -474,6 +496,28 @@ class MintBackup:
                 self.builder.get_object("button_forward").hide()
             self.notebook.set_current_page(sel)
 
+    def on_password_protect_toggled(self, checkbutton):
+        # Toggle password protection
+        active = checkbutton.get_active()
+        self.builder.get_object("password1").set_sensitive(active)
+        self.builder.get_object("password2").set_sensitive(active)
+
+    def on_password_visibility_toggled(self, checkbutton):
+        # Toggle password visibility
+        visible = checkbutton.get_active()
+        self.builder.get_object("password1").set_visibility(visible)
+        self.builder.get_object("password2").set_visibility(visible)
+
+    def on_password_fields_changed(self, entry):
+        # Check if passwords match and are strong enough
+        password1 = self.builder.get_object("password1").get_text()
+        password2 = self.builder.get_object("password2").get_text()
+        levelbar1 = self.builder.get_object("password1_strength")
+        levelbar2 = self.builder.get_object("password2_strength")
+
+        levelbar1.set_value(check_password_strength(password1))
+        levelbar2.set_value(check_password_strength(password2))
+        
     # FILE BACKUP FUNCTIONS
     #############################################################################################################################
 
