@@ -1375,47 +1375,34 @@
                 <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <child>
-                  <object class="GtkBox" id="box">
+                  <object class="GtkCheckButton" id="password_protect_check">
+                    <property name="label" translatable="yes">Encrypt backup</property>
                     <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="spacing">12</property>
-                    <child>
-                      <object class="GtkCheckButton">
-                        <property name="label" translatable="yes">Password protect backup</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">False</property>
-                        <property name="draw-indicator">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="draw-indicator">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="padding">10</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="bo">
+                  <object class="GtkBox" id="passwordbox1">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="spacing">12</property>
+                    <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Password</property>
+                        <property name="label" translatable="yes">Password:</property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="padding">1</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -1423,14 +1410,29 @@
                       <object class="GtkEntry" id="password1">
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
+                        <property name="halign">end</property>
                         <property name="visibility">False</property>
                         <property name="invisible-char">•</property>
+                        <property name="input-purpose">password</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="padding">50</property>
+                        <property name="padding">54</property>
                         <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLevelBar" id="password1_strength">
+                        <property name="width-request">100</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -1441,15 +1443,16 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="b">
+                  <object class="GtkBox" id="passwordbox2">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="spacing">12</property>
+                    <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Confirm password</property>
+                        <property name="label" translatable="yes">Re-enter password:</property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1461,13 +1464,29 @@
                       <object class="GtkEntry" id="password2">
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
+                        <property name="halign">end</property>
                         <property name="visibility">False</property>
                         <property name="invisible-char">•</property>
+                        <property name="input-purpose">password</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLevelBar" id="password2_strength">
+                        <property name="width-request">100</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="padding">55</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -1478,7 +1497,19 @@
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkCheckButton" id="password_visibility">
+                    <property name="label" translatable="yes">Show password</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="image-position">right</property>
+                    <property name="draw-indicator">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
                 </child>
               </object>
               <packing>
